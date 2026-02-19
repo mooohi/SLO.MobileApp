@@ -10,6 +10,7 @@ namespace SLO.MobileApp
             InitializeComponent();
         }
 
+#nullable enable
         protected override Window CreateWindow(IActivationState? activationState)
         {
             return new Window(new AppShell());
