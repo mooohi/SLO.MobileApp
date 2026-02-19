@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- <ProjectReference Include="..\SLO.MobileApp\SLO.MobileApp.csproj" /> -->
+    <ProjectReference Include="..\SLO.MobileApp\SLO.MobileApp.csproj" />
   </ItemGroup>
 
   <ItemGroup>
