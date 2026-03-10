@@ -3,6 +3,7 @@ using SLO.MobileApp.Brokers.Loggings;
 using SLO.MobileApp.Brokers.Storages;
 using SLO.MobileApp.Models.Foundations.ShoppingItems;
 using SLO.MobileApp.Services.Foundations.ShoppingItems;
+using System;
 using Tynamix.ObjectFiller;
 
 namespace SLO.MobileApp.UnitTests.Services.Foundations.ShoppingItems;
@@ -31,6 +32,10 @@ public partial class ShoppingItemServiceTests
     private static Filler<ShoppingItem> CreateShoppingItemFiller()
     {
         var filler = new Filler<ShoppingItem>();
+        DateTimeOffset randomDateTime = DateTimeOffset.UtcNow;
+
+        filler.Setup()
+            .OnType<DateTimeOffset>().Use(randomDateTime);
 
         return filler;
     }

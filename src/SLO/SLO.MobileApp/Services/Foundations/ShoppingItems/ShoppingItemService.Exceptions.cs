@@ -20,6 +20,10 @@ internal sealed partial class ShoppingItemService
         {
             throw await CreateValidationErrorAsync(ex);
         }
+        catch (InvalidShoppingItemException ex)
+        {
+            throw await CreateValidationErrorAsync(ex);
+        }
     }
 
     private async ValueTask<ShoppingItemValidationException> CreateValidationErrorAsync(
