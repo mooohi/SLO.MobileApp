@@ -2,6 +2,7 @@
 using SLO.MobileApp.Models.Foundations.ShoppingItems;
 using SLO.MobileApp.Models.Foundations.ShoppingItems.Exceptions;
 using SLO.MobileApp.UnitTests.Helpers;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -93,6 +94,56 @@ public partial class ShoppingItemServiceTests
         invalidShoppingItemException.AddData(
             key: nameof(ShoppingItem.UpdatedAt),
             values: "Date is required.");
+
+        var expectedShoppingItemValidationException =
+            new ShoppingItemValidationException(
+                exceptionMessage: "Shopping item validation error occurred, " +
+                "fix the errors and try again please!",
+                innerException: invalidShoppingItemException);
+
+        // when
+        ValueTask<ShoppingItem> addShoppingItemTask =
+            _shoppingItemService.AddShoppingItemAsync(
+                invalidShoppingItem,
+                It.IsAny<CancellationToken>());
+
+        await Assert.ThrowsAsync<ShoppingItemValidationException>(
+            addShoppingItemTask.AsTask);
+
+        // then
+        _storageBrokerMock.Verify(broker =>
+            broker.InsertShoppingItemAsync(
+                It.IsAny<ShoppingItem>(),
+                It.IsAny<CancellationToken>()),
+            Times.Never());
+
+        _loggingBrokerMock.Verify(broker =>
+            broker.LogErrorAsync(
+                It.Is(Randomizers.SameExceptionAs(
+                    expectedShoppingItemValidationException)),
+                It.IsAny<CancellationToken>()),
+            Times.Once());
+
+        VerifyNoOtherDependencyCalls();
+    }
+
+    [Fact]
+    public async Task ShouldThrowValidationExceptionOnAddIfUpdatedByNotSameAsCreatedByAndLogItAsync()
+    {
+        // given
+        ShoppingItem randomShoppingItem = CreateRandomShoppingItem();
+        ShoppingItem invalidShoppingItem = randomShoppingItem;
+        Guid notSameId = Guid.NewGuid();
+        invalidShoppingItem.UpdatedBy = notSameId;
+
+        var invalidShoppingItemException =
+            new InvalidShoppingItemException(
+                exceptionMessage: "Invalid shopping item error occurred, " +
+                "fix the errors and try again please!");
+
+        invalidShoppingItemException.AddData(
+            key: nameof(ShoppingItem.UpdatedBy),
+            values: $"Id not same as {nameof(ShoppingItem.CreatedBy)}.");
 
         var expectedShoppingItemValidationException =
             new ShoppingItemValidationException(
