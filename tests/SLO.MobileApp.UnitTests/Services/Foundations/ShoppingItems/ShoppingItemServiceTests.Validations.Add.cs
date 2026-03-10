@@ -176,4 +176,58 @@ public partial class ShoppingItemServiceTests
 
         VerifyNoOtherDependencyCalls();
     }
+
+    [Fact]
+    public async Task ShouldThrowValidationExceptionOnAddIfUpdatedAtNotSameAsCreatedAtAndLogItAsync()
+    {
+        // given
+        ShoppingItem randomShoppingItem = CreateRandomShoppingItem();
+        ShoppingItem invalidShoppingItem = randomShoppingItem;
+
+        invalidShoppingItem.UpdatedBy =
+            invalidShoppingItem.CreatedBy;
+
+        DateTimeOffset notSameDateTime = Randomizers.GetRandomDateTime();
+        invalidShoppingItem.UpdatedAt = notSameDateTime;
+
+        var invalidShoppingItemException =
+            new InvalidShoppingItemException(
+                exceptionMessage: "Invalid shopping item error occurred, " +
+                "fix the errors and try again please!");
+
+        invalidShoppingItemException.AddData(
+            key: nameof(ShoppingItem.UpdatedAt),
+            values: $"Date is not same as {nameof(ShoppingItem.CreatedAt)}.");
+
+        var expectedShoppingItemValidationException =
+            new ShoppingItemValidationException(
+                exceptionMessage: "Shopping item validation error occurred, " +
+                "fix the errors and try again please!",
+                innerException: invalidShoppingItemException);
+
+        // when
+        ValueTask<ShoppingItem> addShoppingItemTask =
+            _shoppingItemService.AddShoppingItemAsync(
+                invalidShoppingItem,
+                It.IsAny<CancellationToken>());
+
+        await Assert.ThrowsAsync<ShoppingItemValidationException>(
+            addShoppingItemTask.AsTask);
+
+        // then
+        _storageBrokerMock.Verify(broker =>
+            broker.InsertShoppingItemAsync(
+                It.IsAny<ShoppingItem>(),
+                It.IsAny<CancellationToken>()),
+            Times.Never());
+
+        _loggingBrokerMock.Verify(broker =>
+            broker.LogErrorAsync(
+                It.Is(Randomizers.SameExceptionAs(
+                    expectedShoppingItemValidationException)),
+                It.IsAny<CancellationToken>()),
+            Times.Once());
+
+        VerifyNoOtherDependencyCalls();
+    }
 }
