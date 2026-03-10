@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using System;
 using System.Linq.Expressions;
+using Xeptions;
 
 namespace SLO.MobileApp.UnitTests.Helpers;
 
@@ -21,6 +22,12 @@ internal static partial class Randomizers
 
         actualException.InnerException.Message.Should().BeEquivalentTo(
             expectedException.InnerException.Message);
+
+        if (actualException.InnerException is Xeption)
+        {
+            actualException.InnerException.Data.Should().BeEquivalentTo(
+                expectedException.InnerException.Data);
+        }
 
         return true;
     }

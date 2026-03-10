@@ -50,4 +50,79 @@ public partial class ShoppingItemServiceTests
 
         VerifyNoOtherDependencyCalls();
     }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData(" ")]
+    public async Task ShouldThrowValidationExceptionOnAddIfShoppingItemIsInvalidAndLogItAsync(
+        string invalidString)
+    {
+        // given
+        ShoppingItem invalidShoppingItem =
+            new ShoppingItem
+            {
+                Name = invalidString,
+            };
+
+        var invalidShoppingItemException =
+            new InvalidShoppingItemException(
+                exceptionMessage: "Invalid shopping item error occurred, " +
+                "fix the errors and try again please!");
+
+        invalidShoppingItemException.AddData(
+            key: nameof(ShoppingItem.Id),
+            values: "Id is required.");
+
+        invalidShoppingItemException.AddData(
+            key: nameof(ShoppingItem.CreatedBy),
+            values: "Id is required.");
+
+        invalidShoppingItemException.AddData(
+            key: nameof(ShoppingItem.UpdatedBy),
+            values: "Id is required.");
+
+        invalidShoppingItemException.AddData(
+            key: nameof(ShoppingItem.Name),
+            values: "Text is required.");
+
+        invalidShoppingItemException.AddData(
+            key: nameof(ShoppingItem.CreatedAt),
+            values: "Date is required.");
+
+        invalidShoppingItemException.AddData(
+            key: nameof(ShoppingItem.UpdatedAt),
+            values: "Date is required.");
+
+        var expectedShoppingItemValidationException =
+            new ShoppingItemValidationException(
+                exceptionMessage: "Shopping item validation error occurred, " +
+                "fix the errors and try again please!",
+                innerException: invalidShoppingItemException);
+
+        // when
+        ValueTask<ShoppingItem> addShoppingItemTask =
+            _shoppingItemService.AddShoppingItemAsync(
+                invalidShoppingItem,
+                It.IsAny<CancellationToken>());
+
+        await Assert.ThrowsAsync<ShoppingItemValidationException>(
+            addShoppingItemTask.AsTask);
+
+        // then
+        _storageBrokerMock.Verify(broker =>
+            broker.InsertShoppingItemAsync(
+                It.IsAny<ShoppingItem>(),
+                It.IsAny<CancellationToken>()),
+            Times.Never());
+
+        _loggingBrokerMock.Verify(broker =>
+            broker.LogErrorAsync(
+                It.Is(Randomizers.SameExceptionAs(
+                    expectedShoppingItemValidationException)),
+                It.IsAny<CancellationToken>()),
+            Times.Once());
+
+        VerifyNoOtherDependencyCalls();
+    }
 }
