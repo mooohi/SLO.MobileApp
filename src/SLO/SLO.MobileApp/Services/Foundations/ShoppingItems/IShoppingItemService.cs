@@ -8,4 +8,7 @@ internal interface IShoppingItemService
 {
     ValueTask<ShoppingItem> AddShoppingItemAsync(
         ShoppingItem shoppingItem, CancellationToken cancellationToken);
+
+    ValueTask<ShoppingItem> ModifyShoppingItemAsync(
+        ShoppingItem shoppingItem, CancellationToken cancellationToken);
 }

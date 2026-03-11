@@ -1,4 +1,5 @@
 ﻿using SLO.MobileApp.Models.Foundations.ShoppingItems;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,5 +10,15 @@ internal sealed partial class StorageBroker
     public async ValueTask<ShoppingItem> InsertShoppingItemAsync(
         ShoppingItem shoppingItem,
         CancellationToken cancellationToken) =>
-        await InsertAsync(shoppingItem, cancellationToken);
+        await InsertAsync(item: shoppingItem, cancellationToken);
+
+    public async ValueTask<ShoppingItem> SelectShoppingItemByIdAsync(
+        Guid shoppingItemId, CancellationToken cancellationToken) =>
+        await SelectByIdAsync<ShoppingItem>(
+            cancellationToken,
+            ids: shoppingItemId);
+
+    public async ValueTask<ShoppingItem> UpdateShoppingItemAsync(
+        ShoppingItem shoppingItem, CancellationToken cancellationToken) =>
+        await UpdateAsync(item: shoppingItem, cancellationToken);
 }
