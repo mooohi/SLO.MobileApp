@@ -1,9 +1,9 @@
-﻿using SLO.MobileApp.Models.Foundations.ShoppingItems;
-using SLO.MobileApp.Models.Foundations.ShoppingItems.Exceptions;
+﻿using SLO.MobileApp.Core.Models.Foundations.ShoppingItems;
+using SLO.MobileApp.Core.Models.Foundations.ShoppingItems.Exceptions;
 using System;
 using System.Threading.Tasks;
 
-namespace SLO.MobileApp.Services.Foundations.ShoppingItems;
+namespace SLO.MobileApp.Core.Services.Foundations.ShoppingItems;
 
 internal sealed partial class ShoppingItemService
 {

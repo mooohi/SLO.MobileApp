@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SLO.MobileApp.Models.Foundations;
+namespace SLO.MobileApp.Core.Models.Foundations;
 
 internal interface IAuditable
 {

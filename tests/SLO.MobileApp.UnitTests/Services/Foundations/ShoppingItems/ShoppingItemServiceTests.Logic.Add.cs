@@ -1,13 +1,13 @@
 ﻿using FluentAssertions;
 using Force.DeepCloner;
 using Moq;
-using SLO.MobileApp.Models.Foundations.ShoppingItems;
-using SLO.MobileApp.UnitTests.Helpers;
+using SLO.MobileApp.Core.Models.Foundations.ShoppingItems;
+using SLO.MobileApp.Core.UnitTests.Helpers;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SLO.MobileApp.UnitTests.Services.Foundations.ShoppingItems;
+namespace SLO.MobileApp.UnitTests.Core.Services.Foundations.ShoppingItems;
 
 public partial class ShoppingItemServiceTests
 {

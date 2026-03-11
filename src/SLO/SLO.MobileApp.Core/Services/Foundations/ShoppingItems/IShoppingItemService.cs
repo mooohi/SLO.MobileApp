@@ -1,8 +1,8 @@
-﻿using SLO.MobileApp.Models.Foundations.ShoppingItems;
+﻿using SLO.MobileApp.Core.Models.Foundations.ShoppingItems;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SLO.MobileApp.Services.Foundations.ShoppingItems;
+namespace SLO.MobileApp.Core.Services.Foundations.ShoppingItems;
 
 internal interface IShoppingItemService
 {

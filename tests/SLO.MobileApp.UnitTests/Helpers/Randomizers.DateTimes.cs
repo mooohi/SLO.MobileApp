@@ -1,7 +1,7 @@
 ﻿using System;
 using Tynamix.ObjectFiller;
 
-namespace SLO.MobileApp.UnitTests.Helpers;
+namespace SLO.MobileApp.Core.UnitTests.Helpers;
 
 internal static partial class Randomizers
 {

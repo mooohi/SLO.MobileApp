@@ -1,14 +1,14 @@
 ﻿using Moq;
-using SLO.MobileApp.Brokers.DateTimes;
-using SLO.MobileApp.Brokers.Loggings;
-using SLO.MobileApp.Brokers.Storages;
-using SLO.MobileApp.Models.Foundations.ShoppingItems;
-using SLO.MobileApp.Services.Foundations.ShoppingItems;
-using SLO.MobileApp.UnitTests.Helpers;
+using SLO.MobileApp.Core.Brokers.DateTimes;
+using SLO.MobileApp.Core.Brokers.Loggings;
+using SLO.MobileApp.Core.Brokers.Storages;
+using SLO.MobileApp.Core.Models.Foundations.ShoppingItems;
+using SLO.MobileApp.Core.Services.Foundations.ShoppingItems;
+using SLO.MobileApp.Core.UnitTests.Helpers;
 using System;
 using Tynamix.ObjectFiller;
 
-namespace SLO.MobileApp.UnitTests.Services.Foundations.ShoppingItems;
+namespace SLO.MobileApp.UnitTests.Core.Services.Foundations.ShoppingItems;
 
 public partial class ShoppingItemServiceTests
 {

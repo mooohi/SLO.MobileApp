@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SLO.MobileApp.Brokers.Loggings;
+namespace SLO.MobileApp.Core.Brokers.Loggings;
 
 public interface ILoggingBroker
 {

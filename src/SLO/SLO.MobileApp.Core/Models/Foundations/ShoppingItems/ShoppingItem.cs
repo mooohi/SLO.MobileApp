@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SLO.MobileApp.Models.Foundations.ShoppingItems;
+namespace SLO.MobileApp.Core.Models.Foundations.ShoppingItems;
 
 public sealed class ShoppingItem : IAuditable
 {

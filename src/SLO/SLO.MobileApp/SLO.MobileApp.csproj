@@ -58,7 +58,7 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="SLO.MobileApp.UnitTests" />
+    <ProjectReference Include="..\SLO.MobileApp.Core\SLO.MobileApp.Core.csproj" />
   </ItemGroup>
 
 </Project>

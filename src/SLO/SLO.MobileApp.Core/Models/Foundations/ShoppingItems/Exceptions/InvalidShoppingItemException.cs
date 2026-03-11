@@ -1,6 +1,6 @@
 ﻿using Xeptions;
 
-namespace SLO.MobileApp.Models.Foundations.ShoppingItems.Exceptions;
+namespace SLO.MobileApp.Core.Models.Foundations.ShoppingItems.Exceptions;
 
 internal class InvalidShoppingItemException : Xeption
 {

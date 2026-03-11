@@ -1,11 +1,11 @@
-﻿using SLO.MobileApp.Brokers.DateTimes;
-using SLO.MobileApp.Brokers.Loggings;
-using SLO.MobileApp.Brokers.Storages;
-using SLO.MobileApp.Models.Foundations.ShoppingItems;
+﻿using SLO.MobileApp.Core.Brokers.DateTimes;
+using SLO.MobileApp.Core.Brokers.Loggings;
+using SLO.MobileApp.Core.Brokers.Storages;
+using SLO.MobileApp.Core.Models.Foundations.ShoppingItems;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SLO.MobileApp.Services.Foundations.ShoppingItems;
+namespace SLO.MobileApp.Core.Services.Foundations.ShoppingItems;
 
 internal sealed partial class ShoppingItemService : IShoppingItemService
 {

@@ -1,4 +1,30 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1" pages="4">
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1" pages="5">
+  <diagram id="AJybEndliQvF_vg6prNn" name="High Level Design">
+    <mxGraphModel dx="786" dy="934" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="uzJOoziCXWOQ5EDh2EkI-1" parent="1" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shadow=0;dashed=0;strokeWidth=1;shape=mxgraph.android.phone2;strokeColor=#c0c0c0;" value="" vertex="1">
+          <mxGeometry height="390" width="200" x="31" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="uzJOoziCXWOQ5EDh2EkI-3" edge="1" parent="1" source="uzJOoziCXWOQ5EDh2EkI-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" target="uzJOoziCXWOQ5EDh2EkI-1" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uzJOoziCXWOQ5EDh2EkI-5" edge="1" parent="1" source="uzJOoziCXWOQ5EDh2EkI-2" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" target="uzJOoziCXWOQ5EDh2EkI-4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uzJOoziCXWOQ5EDh2EkI-2" parent="1" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.android;fillColor=#115193;gradientColor=none;" value=".NET MAUI&amp;nbsp;" vertex="1">
+          <mxGeometry height="84" width="73.5" x="339" y="155" as="geometry" />
+        </mxCell>
+        <mxCell id="uzJOoziCXWOQ5EDh2EkI-4" parent="1" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.android;fillColor=#115193;gradientColor=none;" value="Class Library" vertex="1">
+          <mxGeometry height="84" width="73.5" x="532.5" y="155" as="geometry" />
+        </mxCell>
+        <mxCell id="uzJOoziCXWOQ5EDh2EkI-6" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=16;" value="Structure" vertex="1">
+          <mxGeometry height="30" width="60" x="111" y="-59" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
   <diagram id="nZoEi3-XULkVTgjQRgOf" name="Shopping List Page">
     <mxGraphModel dx="1186" dy="534" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>

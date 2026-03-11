@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SLO.MobileApp.Brokers.DateTimes;
+namespace SLO.MobileApp.Core.Brokers.DateTimes;
 
 public interface IDateTimeBroker
 {

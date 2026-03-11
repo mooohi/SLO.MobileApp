@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\SLO\SLO.MobileApp\SLO.MobileApp.csproj" />
+    <ProjectReference Include="..\..\src\SLO\SLO.MobileApp.Core\SLO.MobileApp.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

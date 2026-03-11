@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SLO.MobileApp.Brokers.Storages;
+namespace SLO.MobileApp.Core.Brokers.Storages;
 
 internal sealed partial class StorageBroker : IStorageBroker
 {
