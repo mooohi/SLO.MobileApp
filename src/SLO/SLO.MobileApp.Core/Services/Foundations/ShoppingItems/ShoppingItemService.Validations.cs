@@ -58,6 +58,25 @@ internal sealed partial class ShoppingItemService
         CancellationToken cancellationToken)
     {
         ValidateShoppingItem(shoppingItem);
+
+        Validate(
+            (Rule: Invalid(shoppingItem.Id),
+            Parameter: nameof(ShoppingItem.Id)),
+
+            (Rule: Invalid(shoppingItem.CreatedBy),
+            Parameter: nameof(ShoppingItem.CreatedBy)),
+
+            (Rule: Invalid(shoppingItem.UpdatedBy),
+            Parameter: nameof(ShoppingItem.UpdatedBy)),
+
+            (Rule: Invalid(shoppingItem.Name),
+            Parameter: nameof(ShoppingItem.Name)),
+
+            (Rule: Invalid(shoppingItem.CreatedAt),
+            Parameter: nameof(ShoppingItem.CreatedAt)),
+
+            (Rule: Invalid(shoppingItem.UpdatedAt),
+            Parameter: nameof(ShoppingItem.UpdatedAt)));
     }
 
     private static void ValidateShoppingItem(
