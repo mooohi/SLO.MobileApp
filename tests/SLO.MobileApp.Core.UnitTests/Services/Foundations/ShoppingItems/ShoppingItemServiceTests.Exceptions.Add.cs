@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using EFxceptions.Models.Exceptions;
+using Microsoft.Data.SqlClient;
 using Moq;
 using SLO.MobileApp.Core.Models.Foundations.ShoppingItems;
 using SLO.MobileApp.Core.Models.Foundations.ShoppingItems.Exceptions;
@@ -11,6 +12,67 @@ namespace SLO.MobileApp.Core.UnitTests.Services.Foundations.ShoppingItems;
 
 public partial class ShoppingItemServiceTests
 {
+    [Fact]
+    public async Task ShouldThrowDependencyValidationExceptionOnAddIfDuplicateKeyErrorOccursAndLogItAsync()
+    {
+        // given
+        ShoppingItem someShoppingItem = CreateRandomShoppingItem();
+
+        someShoppingItem.UpdatedBy =
+            someShoppingItem.CreatedBy;
+
+        string exceptionMessage = Randomizers.GetRandomString();
+
+        var duplicateKeyException =
+            new DuplicateKeyException(exceptionMessage);
+
+        var alreadyExistsShoppingItemException =
+            new AlreadyExistsShoppingItemException(
+                exceptionMessage: "A shopping item with the same Id, " +
+                "already exists.",
+                innerException: duplicateKeyException);
+
+        var expectedShoppingItemDependencyValidationException =
+            new ShoppingItemDependencyValidationException(
+                exceptionMessage: "Shopping item dependency validation error occurred, " +
+                "try again please!",
+                innerException: alreadyExistsShoppingItemException);
+
+        _dateTimeBrokerMock.Setup(broker =>
+            broker.GetCurrentDateTimeAsync(
+                It.IsAny<CancellationToken>()))
+            .ThrowsAsync(duplicateKeyException);
+
+        // when
+        ValueTask<ShoppingItem> addShoppingItemTask =
+            _shoppingItemService.AddShoppingItemAsync(
+                someShoppingItem,
+                It.IsAny<CancellationToken>());
+
+        await Assert.ThrowsAsync<ShoppingItemDependencyValidationException>(
+            addShoppingItemTask.AsTask);
+
+        // then
+        _dateTimeBrokerMock.Verify(broker =>
+            broker.GetCurrentDateTimeAsync(
+                It.IsAny<CancellationToken>()),
+            Times.Once());
+
+        _storageBrokerMock.Verify(broker =>
+            broker.InsertShoppingItemAsync(
+                It.IsAny<ShoppingItem>(),
+                It.IsAny<CancellationToken>()),
+            Times.Never());
+
+        _loggingBrokerMock.Verify(broker =>
+            broker.LogErrorAsync(
+                It.Is(Randomizers.SameExceptionAs(
+                    expectedShoppingItemDependencyValidationException))),
+            Times.Once());
+
+        VerifyNoOtherDependencyCalls();
+    }
+
     [Fact]
     public async Task ShouldThrowCriticalDependencyExceptionOnAddIfSqlErrorOccursAndLogItAsync()
     {
