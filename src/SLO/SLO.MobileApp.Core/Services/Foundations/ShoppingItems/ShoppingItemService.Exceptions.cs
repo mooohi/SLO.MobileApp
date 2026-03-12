@@ -1,5 +1,6 @@
 ﻿using EFxceptions.Models.Exceptions;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using SLO.MobileApp.Core.Models.Foundations.ShoppingItems;
 using SLO.MobileApp.Core.Models.Foundations.ShoppingItems.Exceptions;
 using System;
@@ -36,6 +37,17 @@ internal sealed partial class ShoppingItemService
 
             throw await CreateDependencyValidationErrorAsync(
                 alreadyExistsShoppingItemException);
+        }
+        catch (DbUpdateException ex)
+        {
+            var failedShoppingItemStorageException =
+                new FailedShoppingItemStorageException(
+                    exceptionMessage: "Failed shopping item storage error occurred, " +
+                    "please contact support.",
+                    innerException: ex);
+
+            throw await CreateDependencyErrorAsync(
+                failedShoppingItemStorageException);
         }
         catch (SqlException ex)
         {
@@ -89,6 +101,21 @@ internal sealed partial class ShoppingItemService
             shoppingItemDependencyValidationException);
 
         return shoppingItemDependencyValidationException;
+    }
+
+    private async ValueTask<ShoppingItemDependencyException> CreateDependencyErrorAsync(
+        Exception exception)
+    {
+        var shoppingItemDependencyException =
+            new ShoppingItemDependencyException(
+                exceptionMessage: "Shopping item dependency error occurred, " +
+                "please contact support.",
+                innerException: exception);
+
+        await _loggingBroker.LogErrorAsync(
+            shoppingItemDependencyException);
+
+        return shoppingItemDependencyException;
     }
 
     private async ValueTask<ShoppingItemDependencyException> CreateCriticalDependencyErrorAsync(
