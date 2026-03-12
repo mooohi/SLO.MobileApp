@@ -84,6 +84,12 @@ internal sealed partial class ShoppingItemService
                 secondDate: shoppingItem.CreatedAt,
                 secondDateName: nameof(ShoppingItem.CreatedAt)),
             Parameter: nameof(ShoppingItem.UpdatedAt)));
+
+        Validate(
+            (Rule: await NotRecentAsync(
+                dateTime: shoppingItem.UpdatedAt,
+                cancellationToken),
+            Parameter: nameof(shoppingItem.UpdatedAt)));
     }
 
     private static void ValidateShoppingItem(
