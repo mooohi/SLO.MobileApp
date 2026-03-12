@@ -1,4 +1,5 @@
-﻿using SLO.MobileApp.Core.Models.Foundations.ShoppingItems;
+﻿using Microsoft.Data.SqlClient;
+using SLO.MobileApp.Core.Models.Foundations.ShoppingItems;
 using SLO.MobileApp.Core.Models.Foundations.ShoppingItems.Exceptions;
 using System;
 using System.Threading.Tasks;
@@ -24,6 +25,17 @@ internal sealed partial class ShoppingItemService
         {
             throw await CreateValidationErrorAsync(ex);
         }
+        catch (SqlException ex)
+        {
+            var failedShoppingItemStorageException =
+                new FailedShoppingItemStorageException(
+                    exceptionMessage: "Failed shopping item storage error occurred, " +
+                    "please contact support.",
+                    innerException: ex);
+
+            throw await CreateCriticalDependencyErrorAsync(
+                failedShoppingItemStorageException);
+        }
     }
 
     private async ValueTask<ShoppingItemValidationException> CreateValidationErrorAsync(
@@ -39,5 +51,20 @@ internal sealed partial class ShoppingItemService
             shoppingItemValidationException);
 
         return shoppingItemValidationException;
+    }
+
+    private async ValueTask<ShoppingItemDependencyException> CreateCriticalDependencyErrorAsync(
+        Exception exception)
+    {
+        var shoppingItemDependencyException =
+            new ShoppingItemDependencyException(
+                exceptionMessage: "Shopping item dependency error occurred, " +
+                "please contact support.",
+                innerException: exception);
+
+        await _loggingBroker.LogCriticalAsync(
+            shoppingItemDependencyException);
+
+        return shoppingItemDependencyException;
     }
 }
