@@ -53,6 +53,13 @@ internal sealed partial class ShoppingItemService
             Parameter: nameof(shoppingItem.CreatedAt)));
     }
 
+    private async ValueTask ValidateShoppingItemOnModifyAsync(
+        ShoppingItem shoppingItem,
+        CancellationToken cancellationToken)
+    {
+        ValidateShoppingItem(shoppingItem);
+    }
+
     private static void ValidateShoppingItem(
         ShoppingItem shoppingItem)
     {
