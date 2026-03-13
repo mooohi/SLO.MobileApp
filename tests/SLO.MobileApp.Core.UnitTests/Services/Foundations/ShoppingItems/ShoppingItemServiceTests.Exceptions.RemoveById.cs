@@ -69,4 +69,61 @@ public partial class ShoppingItemServiceTests
 
         VerifyNoOtherDependencyCalls();
     }
+
+    [Fact]
+    public async Task ShouldThrowDependencyExceptionOnRemoveByIdIfDbUpdateErrorOccursAndLogItAsync()
+    {
+        // given
+        Guid shoppingItemIt = Guid.NewGuid();
+        string exceptionMessage = Randomizers.GetRandomString();
+        var dbUpdateException = new DbUpdateException(exceptionMessage);
+
+        var failedShoppingItemStorageException =
+            new FailedShoppingItemStorageException(
+                exceptionMessage: "Failed shopping item storage error occurred, " +
+                "please contact support.",
+                innerException: dbUpdateException);
+
+        var expectedShoppingItemDependencyException =
+            new ShoppingItemDependencyException(
+                exceptionMessage: "Shopping item dependency error occurred, " +
+                "please contact support.",
+                innerException: failedShoppingItemStorageException);
+
+        _storageBrokerMock.Setup(broker =>
+            broker.SelectShoppingItemByIdAsync(
+                shoppingItemIt,
+                It.IsAny<CancellationToken>()))
+            .ThrowsAsync(dbUpdateException);
+
+        // when
+        ValueTask<ShoppingItem> removeShoppingItemByIdTask =
+            _shoppingItemService.RemoveShoppingItemByIdAsync(
+                shoppingItemIt,
+                It.IsAny<CancellationToken>());
+
+        await Assert.ThrowsAsync<ShoppingItemDependencyException>(
+            removeShoppingItemByIdTask.AsTask);
+
+        // then
+        _storageBrokerMock.Verify(broker =>
+            broker.SelectShoppingItemByIdAsync(
+                shoppingItemIt,
+                It.IsAny<CancellationToken>()),
+            Times.Once());
+
+        _storageBrokerMock.Verify(broker =>
+            broker.DeleteShoppingItemAsync(
+                It.IsAny<ShoppingItem>(),
+                It.IsAny<CancellationToken>()),
+            Times.Never());
+
+        _loggingBrokerMock.Verify(broker =>
+            broker.LogErrorAsync(
+                It.Is(Randomizers.SameExceptionAs(
+                    expectedShoppingItemDependencyException))),
+            Times.Once());
+
+        VerifyNoOtherDependencyCalls();
+    }
 }
