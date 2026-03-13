@@ -56,4 +56,55 @@ public partial class ShoppingItemServiceTests
 
         VerifyNoOtherDependencyCalls();
     }
+
+    [Fact]
+    public async Task ShouldThrowValidationExceptionOnRetrieveByIdIfShoppingItemIsNotFoundAndLogItAsync()
+    {
+        // given
+        ShoppingItem nullShoppingItem = null;
+        ShoppingItem storageShoppingItem = nullShoppingItem;
+        Guid notFoundShoppingItemId = Guid.NewGuid();
+        Guid shoppingItemId = notFoundShoppingItemId;
+
+        var notFoundShoppingItemException =
+            new NotFoundShoppingItemException(
+                exceptionMessage: $"A shopping item with Id: {shoppingItemId}, " +
+                $"could not be found.");
+
+        var expectedShoppingItemValidationException =
+            new ShoppingItemValidationException(
+                exceptionMessage: "Shopping item validation error occurred, " +
+                "fix the errors and try again please!",
+                innerException: notFoundShoppingItemException);
+
+        _storageBrokerMock.Setup(broker =>
+            broker.SelectShoppingItemByIdAsync(
+                shoppingItemId,
+                It.IsAny<CancellationToken>()))
+            .ReturnsAsync(storageShoppingItem);
+
+        // when
+        ValueTask<ShoppingItem> retrieveShoppingItemByIdTask =
+            _shoppingItemService.RetrieveShoppingItemByIdAsync(
+                shoppingItemId,
+                It.IsAny<CancellationToken>());
+
+        await Assert.ThrowsAsync<ShoppingItemValidationException>(
+            retrieveShoppingItemByIdTask.AsTask);
+
+        // then
+        _storageBrokerMock.Verify(broker =>
+            broker.SelectShoppingItemByIdAsync(
+                shoppingItemId,
+                It.IsAny<CancellationToken>()),
+            Times.Once());
+
+        _loggingBrokerMock.Verify(broker =>
+            broker.LogErrorAsync(
+                It.Is(Randomizers.SameExceptionAs(
+                    expectedShoppingItemValidationException))),
+            Times.Once());
+
+        VerifyNoOtherDependencyCalls();
+    }
 }
