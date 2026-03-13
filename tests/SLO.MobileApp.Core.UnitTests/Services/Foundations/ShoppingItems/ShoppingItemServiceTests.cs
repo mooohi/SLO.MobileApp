@@ -6,6 +6,7 @@ using SLO.MobileApp.Core.Models.Foundations.ShoppingItems;
 using SLO.MobileApp.Core.Services.Foundations.ShoppingItems;
 using SLO.MobileApp.Core.UnitTests.Helpers;
 using System;
+using System.Linq;
 using Tynamix.ObjectFiller;
 
 namespace SLO.MobileApp.Core.UnitTests.Services.Foundations.ShoppingItems;
@@ -41,6 +42,11 @@ public partial class ShoppingItemServiceTests
         DateTimeOffset dateTimes = default) =>
         CreateShoppingItemFiller(dateTimes)
         .Create();
+
+    private static IQueryable<ShoppingItem> CreateRandomShoppingItems() =>
+        CreateShoppingItemFiller()
+        .Create(count: Randomizers.GetRandomNumber())
+        .AsQueryable();
 
     private static Filler<ShoppingItem> CreateShoppingItemFiller(
         DateTimeOffset dateTimes = default)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,6 +9,10 @@ internal sealed partial class StorageBroker : IStorageBroker
 {
     private async ValueTask<T> InsertAsync<T>(
         T item, CancellationToken cancellationToken) =>
+        throw new NotImplementedException();
+
+    private async ValueTask<IQueryable<T>> SelectAllAsync<T>(
+        CancellationToken cancellationToken) =>
         throw new NotImplementedException();
 
     private async ValueTask<T> SelectByIdAsync<T>(
