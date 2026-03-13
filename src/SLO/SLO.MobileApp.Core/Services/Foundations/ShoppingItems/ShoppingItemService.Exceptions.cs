@@ -108,6 +108,17 @@ internal sealed partial class ShoppingItemService
             throw await CreateCriticalDependencyErrorAsync(
                 failedShoppingItemStorageException);
         }
+        catch (Exception ex)
+        {
+            var failedShoppingItemServiceException =
+                new FailedShoppingItemServiceException(
+                    exceptionMessage: "Failed shopping item service error occurred, " +
+                    "please contact support.",
+                    innerException: ex);
+
+            throw await CreateServiceErrorAsync(
+                failedShoppingItemServiceException);
+        }
     }
 
     private async ValueTask<ShoppingItemValidationException> CreateValidationErrorAsync(
