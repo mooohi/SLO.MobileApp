@@ -92,6 +92,18 @@ internal sealed partial class ShoppingItemService
             Parameter: nameof(shoppingItem.UpdatedAt)));
     }
 
+    private static void ValidateAgainstStorageShoppingItem(
+        ShoppingItem shoppingItem,
+        ShoppingItem storageShoppingItem)
+    {
+        Validate(
+            (Rule: NotSameAs(
+                firstId: shoppingItem.CreatedBy,
+                secondId: storageShoppingItem.CreatedBy,
+                secondIdName: nameof(ShoppingItem.CreatedBy)),
+            Parameter: nameof(ShoppingItem.CreatedBy)));
+    }
+
     private static void ValidateShoppingItem(
         ShoppingItem shoppingItem)
     {
