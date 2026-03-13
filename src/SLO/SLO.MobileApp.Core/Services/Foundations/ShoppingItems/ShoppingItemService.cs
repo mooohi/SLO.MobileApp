@@ -51,8 +51,15 @@ internal sealed partial class ShoppingItemService : IShoppingItemService
             ValidateShoppingItemOnRetrieveById(
                 shoppingItemId);
 
-            return await _storageBroker.SelectShoppingItemByIdAsync(
-                shoppingItemId, cancellationToken);
+            ShoppingItem storageShoppingItem =
+                await _storageBroker.SelectShoppingItemByIdAsync(
+                    shoppingItemId, cancellationToken);
+
+            ValidateStorageShoppingItem(
+                storageShoppingItem,
+                shoppingItemId);
+
+            return storageShoppingItem;
         });
 
     public async ValueTask<ShoppingItem> ModifyShoppingItemAsync(
