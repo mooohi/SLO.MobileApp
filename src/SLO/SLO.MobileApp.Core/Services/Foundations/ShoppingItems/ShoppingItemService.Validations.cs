@@ -97,6 +97,11 @@ internal sealed partial class ShoppingItemService
         Validate((Rule: Invalid(shoppingItemId),
             Parameter: nameof(shoppingItemId)));
 
+    private static void ValidateShoppingItemOnRemoveById(
+        Guid shoppingItemId) =>
+        Validate((Rule: Invalid(shoppingItemId),
+            Parameter: nameof(shoppingItemId)));
+
     private static void ValidateAgainstStorageShoppingItem(
         ShoppingItem shoppingItem,
         ShoppingItem storageShoppingItem)
