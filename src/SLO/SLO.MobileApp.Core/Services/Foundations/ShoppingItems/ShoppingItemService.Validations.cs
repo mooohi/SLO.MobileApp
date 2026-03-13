@@ -107,7 +107,13 @@ internal sealed partial class ShoppingItemService
                 firstDate: shoppingItem.CreatedAt,
                 secondDate: storageShoppingItem.CreatedAt,
                 secondDateName: nameof(ShoppingItem.CreatedAt)),
-            Parameter: nameof(ShoppingItem.CreatedAt)));
+            Parameter: nameof(ShoppingItem.CreatedAt)),
+
+            (Rule: SameAs(
+                firstDate: shoppingItem.UpdatedAt,
+                secondDate: storageShoppingItem.UpdatedAt,
+                secondDateName: nameof(ShoppingItem.UpdatedAt)),
+            Parameter: nameof(ShoppingItem.UpdatedAt)));
     }
 
     private static void ValidateShoppingItem(
@@ -151,6 +157,16 @@ internal sealed partial class ShoppingItemService
         {
             Condition = string.IsNullOrWhiteSpace(text),
             Message = "Text is required."
+        };
+
+    private static dynamic SameAs(
+        Guid firstId,
+        Guid secondId,
+        string secondIdName) =>
+        new
+        {
+            Condition = firstId == secondId,
+            Message = $"Id is same as {secondIdName}."
         };
 
     private static dynamic SameAs(
