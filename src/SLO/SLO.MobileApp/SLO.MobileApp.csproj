@@ -52,6 +52,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.50" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.5" />
 		<PackageReference Include="Xeption" Version="2.8.0" />
@@ -59,6 +60,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SLO.MobileApp.Core\SLO.MobileApp.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <MauiXaml Update="Features\ShoppingLists\ShoppingList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Features\ShoppingLists\ShoppingListItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
   </ItemGroup>
 
 </Project>
