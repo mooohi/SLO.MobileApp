@@ -2,6 +2,6 @@
 
 namespace SLO.MobileApp.Views.Bases;
 
-class ButtonBase : Button
+public class ButtonBase : Button
 {
 }
