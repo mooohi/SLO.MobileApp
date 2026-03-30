@@ -8,14 +8,44 @@
     xmlns:shoppinglists="clr-namespace:SLO.MobileApp.Features.ShoppingLists"
     x:DataType="shoppinglists:ShoppingList">
 
-    <CollectionView ItemsSource="{Binding ShoppingItems}">
+    <Grid RowDefinitions="*,Auto">
 
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="models:ShoppingItem">
-                <shoppinglists:ShoppingListItem />
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
+        <CollectionView
+            x:Name="ItemsCollectionView"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Margin="10"
+            ItemsSource="{Binding ShoppingItems}"
+            ItemsUpdatingScrollMode="KeepScrollOffset">
 
-    </CollectionView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ShoppingItem">
+                    <shoppinglists:ShoppingListItem />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="5" Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+
+        </CollectionView>
+
+        <Grid Grid.Row="1">
+
+            <bases:ButtonBase
+                Margin="20"
+                Clicked="AddNewItemButton"
+                CornerRadius="30"
+                FontAttributes="Bold"
+                FontAutoScalingEnabled="True"
+                FontSize="24"
+                HeightRequest="60"
+                HorizontalOptions="End"
+                Text="+"
+                WidthRequest="60" />
+
+        </Grid>
+
+    </Grid>
 
 </ContentView>

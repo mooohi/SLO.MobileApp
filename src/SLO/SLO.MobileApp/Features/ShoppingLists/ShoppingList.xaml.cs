@@ -1,13 +1,14 @@
 using Microsoft.Maui.Controls;
 using SLO.MobileApp.Core.Models.Foundations.ShoppingItems;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace SLO.MobileApp.Features.ShoppingLists;
 
 public partial class ShoppingList : ContentView
 {
-    public List<ShoppingItem> ShoppingItems { get; } = [];
+    public ObservableCollection<ShoppingItem> ShoppingItems { get; } =
+        new ObservableCollection<ShoppingItem>();
 
     public ShoppingList()
     {
@@ -18,7 +19,7 @@ public partial class ShoppingList : ContentView
 
     private void BuildShoppingItems()
     {
-        for (int i = 1; i <= 20; i++)
+        for (int i = 1; i <= 59; i++)
         {
             ShoppingItems.Add(
                 new ShoppingItem
@@ -44,4 +45,18 @@ public partial class ShoppingList : ContentView
         return new string(buffer);
     }
 
+    private void AddNewItemButton(object sender, EventArgs e)
+    {
+        ShoppingItems.Add(new ShoppingItem
+        {
+            Name = "New item",
+            Description = "This item is added now",
+            Quantity = ShoppingItems[^1].Quantity + 1,
+        });
+
+        ItemsCollectionView.ScrollTo(
+                index: ShoppingItems.Count - 1,
+                position: ScrollToPosition.End,
+                animate: true);
+    }
 }

@@ -5,12 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:shoppingItemList="clr-namespace:SLO.MobileApp.Features.ShoppingLists">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="30,0" Spacing="25">
-
-            <shoppingItemList:ShoppingList />
-
-        </VerticalStackLayout>
-    </ScrollView>
+    <Grid>
+        <shoppingItemList:ShoppingList />
+    </Grid>
 
 </ContentPage>
