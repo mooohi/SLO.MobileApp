@@ -19,19 +19,21 @@
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="3"
+            Placeholder="Item Name"
             Text="{Binding Name, Mode=TwoWay}" />
 
         <Entry
             Grid.Row="0"
             Grid.Column="3"
-            Text="{Binding Description, Mode=TwoWay}" />
+            Keyboard="Numeric"
+            Placeholder="Quantity"
+            Text="{Binding Quantity, Mode=TwoWay}" />
 
         <Entry
             Grid.Row="1"
-            Grid.Column="0"
-            Grid.ColumnSpan="4"
-            Keyboard="Numeric"
-            Text="{Binding Quantity, Mode=TwoWay}" />
+            Grid.Column="4"
+            Placeholder="Item Description"
+            Text="{Binding Description, Mode=TwoWay}" />
 
         <bases:ButtonBase
             Grid.Row="2"

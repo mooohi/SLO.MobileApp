@@ -84,6 +84,6 @@ public partial class AddShoppingListItemPage : ContentPage
 
     private async void SaveItem(object sender, EventArgs e)
     {
-        await AppShell.Current.Navigation.PopAsync();
+        await AppShell.Current.Navigation.PopModalAsync();
     }
 }

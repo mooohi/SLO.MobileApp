@@ -45,18 +45,32 @@ public partial class ShoppingListPage : ContentPage
         return new string(buffer);
     }
 
-    private async void AddNewItemButton(object sender, EventArgs e)
-    {
-        ShoppingItems.Add(new ShoppingItem
-        {
-            Name = "New item",
-            Description = "This item is added now",
-            Quantity = ShoppingItems[^1].Quantity + 1,
-        });
+    private async void AddNewItemButton(
+        object sender,
+        EventArgs e) =>
+        await AppShell.Current.Navigation.PushModalAsync(
+            page: new AddShoppingListItemPage(),
+            animated: true);
 
-        ItemsCollectionView.ScrollTo(
-                index: ShoppingItems.Count - 1,
-                position: ScrollToPosition.End,
+    protected override void OnNavigatedTo(
+        NavigatedToEventArgs args)
+    {
+        if (args?.PreviousPage is AddShoppingListItemPage addShoppingListItemPage)
+        {
+            var capturedShoppingItem =
+                new ShoppingItem
+                {
+                    Name = addShoppingListItemPage.Name,
+                    Description = addShoppingListItemPage.Description,
+                    Quantity = addShoppingListItemPage.Quantity,
+                };
+
+            ShoppingItems.Add(capturedShoppingItem);
+
+            ItemsCollectionView.ScrollTo(
+                item: capturedShoppingItem,
+                position: ScrollToPosition.MakeVisible,
                 animate: true);
+        }
     }
 }
