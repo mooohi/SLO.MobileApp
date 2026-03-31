@@ -2,9 +2,9 @@ using Microsoft.Maui.Controls;
 using System;
 using System.Runtime.CompilerServices;
 
-namespace SLO.MobileApp.Features.ShoppingLists;
+namespace SLO.MobileApp.Features.ShoppingLists.Views;
 
-public partial class ShoppingListItem : ContentView
+public partial class ShoppingListItemView : ContentView
 {
     public string Name
     {
@@ -33,7 +33,7 @@ public partial class ShoppingListItem : ContentView
     public static readonly BindableProperty DescriptionProperty =
         CreateProperty<string>(propertyName: nameof(Description));
 
-    public ShoppingListItem()
+    public ShoppingListItemView()
     {
         InitializeComponent();
         BindingContext = this;
@@ -78,7 +78,7 @@ public partial class ShoppingListItem : ContentView
         BindableProperty.Create(
             propertyName,
             returnType: typeof(T),
-            declaringType: typeof(ShoppingListItem),
+            declaringType: typeof(ShoppingListItemView),
             defaultValue,
             defaultBindingMode: BindingMode.OneWay);
 }

@@ -63,13 +63,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <MauiXaml Update="Features\ShoppingLists\AddShoppingListItemView.xaml">
+    <Compile Update="Features\ShoppingLists\Pages\AddShoppingListItemPage.xaml.cs">
+      <DependentUpon>AddShoppingListItemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Features\ShoppingLists\Pages\ShoppingListPage.xaml.cs">
+      <DependentUpon>ShoppingListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Features\ShoppingLists\Views\ShoppingListItemView.xaml.cs">
+      <DependentUpon>ShoppingListItemView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <MauiXaml Update="Features\ShoppingLists\Pages\AddShoppingListItemPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Features\ShoppingLists\ShoppingList.xaml">
+    <MauiXaml Update="Features\ShoppingLists\Pages\ShoppingListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Features\ShoppingLists\ShoppingListItem.xaml">
+    <MauiXaml Update="Features\ShoppingLists\Views\ShoppingListItemView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\Controls\Buttons\CircleButton.xaml">

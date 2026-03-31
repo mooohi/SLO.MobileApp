@@ -3,14 +3,14 @@ using SLO.MobileApp.Core.Models.Foundations.ShoppingItems;
 using System;
 using System.Collections.ObjectModel;
 
-namespace SLO.MobileApp.Features.ShoppingLists;
+namespace SLO.MobileApp.Features.ShoppingLists.Pages;
 
-public partial class ShoppingList : ContentView
+public partial class ShoppingListPage : ContentView
 {
     public ObservableCollection<ShoppingItem> ShoppingItems { get; } =
         new ObservableCollection<ShoppingItem>();
 
-    public ShoppingList()
+    public ShoppingListPage()
     {
         InitializeComponent();
         this.BindingContext = this;
@@ -45,7 +45,7 @@ public partial class ShoppingList : ContentView
         return new string(buffer);
     }
 
-    private void AddNewItemButton(object sender, EventArgs e)
+    private async void AddNewItemButton(object sender, EventArgs e)
     {
         ShoppingItems.Add(new ShoppingItem
         {
