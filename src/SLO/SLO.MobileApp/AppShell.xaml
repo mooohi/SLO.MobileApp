@@ -5,16 +5,28 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SLO.MobileApp"
     xmlns:shoppingList="clr-namespace:SLO.MobileApp.Features.ShoppingLists.Pages"
-    Title="SLO.MobileApp">
+    Title="Personal Shopping List Organizer">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
 
-    <ShellContent
-        Title="Shopping List"
-        ContentTemplate="{DataTemplate shoppingList:ShoppingListPage}"
-        Route="ShoppingListPage" />
+        <Tab Title="Cart">
+
+            <ShellContent
+                Title="Shopping List"
+                ContentTemplate="{DataTemplate shoppingList:ShoppingListPage}"
+                Route="ShoppingListPage" />
+
+        </Tab>
+
+        <Tab Title="Home">
+
+            <ShellContent
+                Title="Home"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage" />
+
+        </Tab>
+
+    </TabBar>
 
 </Shell>
