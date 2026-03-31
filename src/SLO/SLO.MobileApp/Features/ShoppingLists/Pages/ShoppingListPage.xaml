@@ -18,6 +18,24 @@
             ItemsSource="{Binding ShoppingItems}"
             ItemsUpdatingScrollMode="KeepScrollOffset">
 
+            <CollectionView.EmptyView>
+                <Grid
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill">
+
+                    <bases:LabelBase
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="Your cart is empty!"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+
+                </Grid>
+
+            </CollectionView.EmptyView>
+
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:ShoppingItem">
                     <views:ShoppingListItemView />

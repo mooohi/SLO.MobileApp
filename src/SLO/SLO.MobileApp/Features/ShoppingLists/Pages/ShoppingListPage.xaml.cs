@@ -14,35 +14,6 @@ public partial class ShoppingListPage : ContentPage
     {
         InitializeComponent();
         this.BindingContext = this;
-        BuildShoppingItems();
-    }
-
-    private void BuildShoppingItems()
-    {
-        for (int i = 1; i <= 59; i++)
-        {
-            ShoppingItems.Add(
-                new ShoppingItem
-                {
-                    Name = GetRandomString(),
-                    Description = Guid.NewGuid().ToString(),
-                    Quantity = i,
-                });
-        }
-    }
-
-    private string GetRandomString(int length = 10)
-    {
-        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        var random = new Random();
-        var buffer = new char[length];
-
-        for (int i = 0; i < length; i++)
-        {
-            buffer[i] = chars[random.Next(length)];
-        }
-
-        return new string(buffer);
     }
 
     private async void AddNewItemButton(
