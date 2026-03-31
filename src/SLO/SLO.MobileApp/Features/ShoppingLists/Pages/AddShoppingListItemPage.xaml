@@ -38,12 +38,13 @@
         <bases:ButtonBase
             Grid.Row="2"
             Grid.Column="2"
+            Clicked="ClosePage"
             Text="Discard" />
 
         <bases:ButtonBase
             Grid.Row="2"
             Grid.Column="3"
-            Clicked="SaveItem"
+            Clicked="ClosePage"
             Text="Save" />
 
     </Grid>

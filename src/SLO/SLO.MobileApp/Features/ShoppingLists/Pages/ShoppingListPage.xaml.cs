@@ -26,9 +26,24 @@ public partial class ShoppingListPage : ContentPage
     protected override void OnNavigatedTo(
         NavigatedToEventArgs args)
     {
-        if (args?.PreviousPage is AddShoppingListItemPage addShoppingListItemPage)
+        switch (args?.PreviousPage)
         {
-            var capturedShoppingItem =
+            case ShoppingListPage:
+                return;
+
+            case AddShoppingListItemPage page:
+                CaptureAddedShoppingItem(page);
+                return;
+
+            default:
+                return;
+        }
+    }
+
+    private void CaptureAddedShoppingItem(
+        AddShoppingListItemPage addShoppingListItemPage)
+    {
+        var capturedShoppingItem =
                 new ShoppingItem
                 {
                     Name = addShoppingListItemPage.Name,
@@ -36,12 +51,11 @@ public partial class ShoppingListPage : ContentPage
                     Quantity = addShoppingListItemPage.Quantity,
                 };
 
-            ShoppingItems.Add(capturedShoppingItem);
+        ShoppingItems.Add(capturedShoppingItem);
 
-            ItemsCollectionView.ScrollTo(
-                item: capturedShoppingItem,
-                position: ScrollToPosition.MakeVisible,
-                animate: true);
-        }
+        ItemsCollectionView.ScrollTo(
+            item: capturedShoppingItem,
+            position: ScrollToPosition.MakeVisible,
+            animate: true);
     }
 }

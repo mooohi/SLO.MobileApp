@@ -82,7 +82,7 @@ public partial class AddShoppingListItemPage : ContentPage
             defaultValue,
             defaultBindingMode: BindingMode.TwoWay);
 
-    private async void SaveItem(object sender, EventArgs e)
+    private async void ClosePage(object sender, EventArgs e)
     {
         await AppShell.Current.Navigation.PopModalAsync();
     }
