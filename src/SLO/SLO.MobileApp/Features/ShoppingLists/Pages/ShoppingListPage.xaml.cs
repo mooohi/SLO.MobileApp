@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace SLO.MobileApp.Features.ShoppingLists.Pages;
 
-public partial class ShoppingListPage : ContentView
+public partial class ShoppingListPage : ContentPage
 {
     public ObservableCollection<ShoppingItem> ShoppingItems { get; } =
         new ObservableCollection<ShoppingItem>();

@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace SLO.MobileApp.Features.ShoppingLists.Pages;
 
-public partial class AddShoppingListItemPage : Grid
+public partial class AddShoppingListItemPage : ContentPage
 {
     public string Name
     {

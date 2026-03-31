@@ -2,12 +2,10 @@
 <ContentPage
     x:Class="SLO.MobileApp.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:shoppingList="clr-namespace:SLO.MobileApp.Features.ShoppingLists.Pages">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <Grid RowDefinitions="*,*">
 
-        <shoppingList:ShoppingListPage Grid.Row="1" />
     </Grid>
 
 </ContentPage>
