@@ -58,4 +58,19 @@ public partial class ShoppingListPage : ContentPage
             position: ScrollToPosition.MakeVisible,
             animate: true);
     }
+
+    private void RemoveShoppingItem(object sender, EventArgs e)
+    {
+        var swipeItem = sender as SwipeItem;
+
+        if (swipeItem is null)
+        {
+            return;
+        }
+
+        var shoppingListItem =
+            swipeItem.BindingContext as ShoppingItem;
+
+        ShoppingItems.Remove(item: shoppingListItem);
+    }
 }

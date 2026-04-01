@@ -3,6 +3,7 @@
     x:Class="SLO.MobileApp.Features.ShoppingLists.Pages.ShoppingListPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
     xmlns:bases="clr-namespace:SLO.MobileApp.Views.Bases"
     xmlns:models="clr-namespace:SLO.MobileApp.Core.Models.Foundations.ShoppingItems;assembly=SLO.MobileApp.Core"
     xmlns:views="clr-namespace:SLO.MobileApp.Features.ShoppingLists.Views"
@@ -40,13 +41,20 @@
 
                 <DataTemplate x:DataType="models:ShoppingItem">
 
-                    <SwipeView>
+                    <SwipeView android:SwipeView.SwipeTransitionMode="Drag">
 
                         <SwipeView.RightItems>
 
-                            <SwipeItem BackgroundColor="Red" Text="Remove" />
+                            <SwipeItems>
 
-                            <SwipeItem BackgroundColor="Orange" Text="Edit" />
+                                <SwipeItem
+                                    BackgroundColor="Red"
+                                    Invoked="RemoveShoppingItem"
+                                    Text="Remove" />
+
+                                <SwipeItem BackgroundColor="Orange" Text="Edit" />
+
+                            </SwipeItems>
 
                         </SwipeView.RightItems>
 
