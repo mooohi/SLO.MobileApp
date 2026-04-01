@@ -5,7 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:bases="clr-namespace:SLO.MobileApp.Views.Bases"
     xmlns:local="clr-namespace:SLO.MobileApp.Features.ShoppingLists.Pages"
-    x:DataType="local:AddShoppingListItemPage">
+    x:DataType="local:AddShoppingListItemPage"
+    MaximumHeightRequest="200"
+    MaximumWidthRequest="400">
 
     <Grid
         Margin="10"
@@ -31,7 +33,8 @@
 
         <Entry
             Grid.Row="1"
-            Grid.Column="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="4"
             Placeholder="Item Description"
             Text="{Binding Description, Mode=TwoWay}" />
 

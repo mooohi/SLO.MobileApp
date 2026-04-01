@@ -37,9 +37,25 @@
             </CollectionView.EmptyView>
 
             <CollectionView.ItemTemplate>
+
                 <DataTemplate x:DataType="models:ShoppingItem">
-                    <views:ShoppingListItemView />
+
+                    <SwipeView>
+
+                        <SwipeView.RightItems>
+
+                            <SwipeItem BackgroundColor="Red" Text="Remove" />
+
+                            <SwipeItem BackgroundColor="Orange" Text="Edit" />
+
+                        </SwipeView.RightItems>
+
+                        <views:ShoppingListItemView BindingContext="{Binding .}" />
+
+                    </SwipeView>
+
                 </DataTemplate>
+
             </CollectionView.ItemTemplate>
 
             <CollectionView.ItemsLayout>
