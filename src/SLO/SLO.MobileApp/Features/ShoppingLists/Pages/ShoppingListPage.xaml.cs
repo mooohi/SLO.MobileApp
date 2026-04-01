@@ -2,6 +2,7 @@ using Microsoft.Maui.Controls;
 using SLO.MobileApp.Core.Models.Foundations.ShoppingItems;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace SLO.MobileApp.Features.ShoppingLists.Pages;
 
@@ -10,18 +11,13 @@ public partial class ShoppingListPage : ContentPage
     public ObservableCollection<ShoppingItem> ShoppingItems { get; } =
         new ObservableCollection<ShoppingItem>();
 
+    public ShoppingItem SelectedShoppingItem { get; set; }
+
     public ShoppingListPage()
     {
         InitializeComponent();
         this.BindingContext = this;
     }
-
-    private async void AddNewItemButton(
-        object sender,
-        EventArgs e) =>
-        await AppShell.Current.Navigation.PushModalAsync(
-            page: new AddShoppingListItemPage(),
-            animated: true);
 
     protected override void OnNavigatedTo(
         NavigatedToEventArgs args)
@@ -35,20 +31,36 @@ public partial class ShoppingListPage : ContentPage
                 CaptureAddedShoppingItem(page);
                 return;
 
+            case EditShoppingListItemPage page:
+                UpdateModifiedShoppingItem(page);
+                return;
+
             default:
                 return;
         }
     }
 
+    private async void AddNewItemClicked(
+        object sender,
+        EventArgs e) =>
+        await AppShell.Current.Navigation.PushModalAsync(
+            page: new AddShoppingListItemPage(),
+            animated: true);
+
     private void CaptureAddedShoppingItem(
-        AddShoppingListItemPage addShoppingListItemPage)
+        AddShoppingListItemPage page)
     {
+        if (page.Discarded)
+        {
+            return;
+        }
+
         var capturedShoppingItem =
                 new ShoppingItem
                 {
-                    Name = addShoppingListItemPage.Name,
-                    Description = addShoppingListItemPage.Description,
-                    Quantity = addShoppingListItemPage.Quantity,
+                    Name = page.Name,
+                    Description = page.Description,
+                    Quantity = page.Quantity,
                 };
 
         ShoppingItems.Add(capturedShoppingItem);
@@ -59,7 +71,42 @@ public partial class ShoppingListPage : ContentPage
             animate: true);
     }
 
-    private void RemoveShoppingItem(object sender, EventArgs e)
+    private void UpdateModifiedShoppingItem(
+        EditShoppingListItemPage page)
+    {
+        if (SelectedShoppingItem is null)
+        {
+            return;
+        }
+
+        if (page.Discarded)
+        {
+            return;
+        }
+
+        ShoppingItem foundShoppingItem =
+            ShoppingItems.FirstOrDefault(shoppingItem =>
+            shoppingItem.Equals(SelectedShoppingItem));
+
+        if (foundShoppingItem is null)
+        {
+            return;
+        }
+
+        ShoppingItem updatedShoppingItem =
+            new ShoppingItem
+            {
+                Name = page.Name,
+                Description = page.Description,
+                Quantity = page.Quantity,
+            };
+
+        int currentItemIndex = ShoppingItems.IndexOf(foundShoppingItem);
+        ShoppingItems[currentItemIndex] = updatedShoppingItem;
+    }
+
+    private void RemoveShoppingItemClicked(
+        object sender, EventArgs e)
     {
         var swipeItem = sender as SwipeItem;
 
@@ -68,9 +115,45 @@ public partial class ShoppingListPage : ContentPage
             return;
         }
 
-        var shoppingListItem =
+        ShoppingItem shoppingItem =
             swipeItem.BindingContext as ShoppingItem;
 
-        ShoppingItems.Remove(item: shoppingListItem);
+        if (shoppingItem is null)
+        {
+            return;
+        }
+
+        ShoppingItems.Remove(item: shoppingItem);
+    }
+
+    private async void EditShoppingItemClicked(
+        object sender, EventArgs e)
+    {
+        var swipeItem = sender as SwipeItem;
+
+        if (swipeItem is null)
+        {
+            return;
+        }
+
+        ShoppingItem shoppingItem =
+            swipeItem.BindingContext as ShoppingItem;
+
+        if (shoppingItem is null)
+        {
+            return;
+        }
+
+        SelectedShoppingItem = shoppingItem;
+
+        var editShoppingListItemPage =
+            new EditShoppingListItemPage(
+                name: shoppingItem.Name,
+                description: shoppingItem.Description,
+                quantity: shoppingItem.Quantity);
+
+        await AppShell.Current.Navigation.PushModalAsync(
+            page: editShoppingListItemPage,
+            animated: true);
     }
 }

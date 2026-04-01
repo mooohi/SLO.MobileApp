@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace SLO.MobileApp.Features.ShoppingLists.Pages;
 
-public partial class AddShoppingListItemPage : ContentPage
+public partial class EditShoppingListItemPage : ContentPage
 {
     public string Name
     {
@@ -26,9 +26,15 @@ public partial class AddShoppingListItemPage : ContentPage
 
     public bool Discarded { get; private set; }
 
-    public AddShoppingListItemPage()
+    public EditShoppingListItemPage(
+        string name,
+        string description,
+        decimal quantity)
     {
         InitializeComponent();
+        Name = name;
+        Description = description;
+        Quantity = quantity;
         this.BindingContext = this;
     }
 
@@ -40,6 +46,11 @@ public partial class AddShoppingListItemPage : ContentPage
 
     public static readonly BindableProperty QuantityProperty =
         CreateProperty<decimal>(propertyName: nameof(Quantity));
+
+    protected override void OnParentChanging(ParentChangingEventArgs args)
+    {
+        base.OnParentChanging(args);
+    }
 
     private dynamic GetValue(
         [CallerMemberName] string propertyName = null) =>

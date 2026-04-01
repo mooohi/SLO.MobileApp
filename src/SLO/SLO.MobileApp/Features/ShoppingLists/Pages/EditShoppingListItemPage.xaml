@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="SLO.MobileApp.Features.ShoppingLists.Pages.AddShoppingListItemPage"
+    x:Class="SLO.MobileApp.Features.ShoppingLists.Pages.EditShoppingListItemPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:bases="clr-namespace:SLO.MobileApp.Views.Bases"
     xmlns:local="clr-namespace:SLO.MobileApp.Features.ShoppingLists.Pages"
-    x:DataType="local:AddShoppingListItemPage"
-    MaximumHeightRequest="200"
-    MaximumWidthRequest="400">
+    x:DataType="local:EditShoppingListItemPage">
 
     <Grid
         Margin="10"
@@ -43,7 +41,6 @@
             Grid.Row="2"
             Grid.Column="2"
             Clicked="ClosePageClicked"
-            CommandParameter="discard"
             Text="Discard" />
 
         <bases:ButtonBase
@@ -53,5 +50,4 @@
             Text="Save" />
 
     </Grid>
-
 </ContentPage>

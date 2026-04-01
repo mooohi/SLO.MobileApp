@@ -49,10 +49,13 @@
 
                                 <SwipeItem
                                     BackgroundColor="Red"
-                                    Invoked="RemoveShoppingItem"
+                                    Invoked="RemoveShoppingItemClicked"
                                     Text="Remove" />
 
-                                <SwipeItem BackgroundColor="Orange" Text="Edit" />
+                                <SwipeItem
+                                    BackgroundColor="Orange"
+                                    Invoked="EditShoppingItemClicked"
+                                    Text="Edit" />
 
                             </SwipeItems>
 
@@ -76,7 +79,7 @@
 
             <bases:ButtonBase
                 Margin="20"
-                Clicked="AddNewItemButton"
+                Clicked="AddNewItemClicked"
                 CornerRadius="30"
                 FontAttributes="Bold"
                 FontAutoScalingEnabled="True"
