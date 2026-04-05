@@ -76,7 +76,7 @@ public partial class AddShoppingListItemPage : ContentPage
     }
     private static BindableProperty CreateProperty<T>(
         string propertyName,
-        string defaultValue = null) =>
+        string defaultValue = default) =>
         BindableProperty.Create(
             propertyName,
             returnType: typeof(T),

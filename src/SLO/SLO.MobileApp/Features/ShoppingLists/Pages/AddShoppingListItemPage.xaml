@@ -11,44 +11,42 @@
 
     <Grid
         Margin="10"
-        ColumnDefinitions="*,*,*,*"
+        ColumnDefinitions="*,*,*,*,*"
         ColumnSpacing="10"
         MaximumHeightRequest="160"
         RowDefinitions="*,*,*"
         RowSpacing="10">
 
-        <Entry
+        <bases:EntryBase
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Placeholder="Item Name"
             Text="{Binding Name, Mode=TwoWay}" />
 
-        <Entry
+        <bases:EntryBase
             Grid.Row="0"
             Grid.Column="3"
-            Keyboard="Numeric"
-            Placeholder="Quantity"
+            Grid.ColumnSpan="2"
             Text="{Binding Quantity, Mode=TwoWay}" />
 
-        <Entry
+        <bases:EntryBase
             Grid.Row="1"
             Grid.Column="0"
-            Grid.ColumnSpan="4"
+            Grid.ColumnSpan="5"
             Placeholder="Item Description"
             Text="{Binding Description, Mode=TwoWay}" />
 
         <bases:ButtonBase
             x:Name="DiscardButton"
             Grid.Row="2"
-            Grid.Column="2"
+            Grid.Column="3"
             Clicked="ClosePageClicked"
-            CommandParameter="discard"
             Text="Discard" />
 
         <bases:ButtonBase
             Grid.Row="2"
-            Grid.Column="3"
+            Grid.Column="4"
             Clicked="ClosePageClicked"
             Text="Save" />
 
