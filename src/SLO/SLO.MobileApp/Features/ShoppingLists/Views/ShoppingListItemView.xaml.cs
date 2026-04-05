@@ -72,6 +72,7 @@ public partial class ShoppingListItemView : ContentView
                 throw new ArgumentNullException(nameof(propertyName));
         }
     }
+
     private static BindableProperty CreateProperty<T>(
         string propertyName,
         string defaultValue = null) =>
