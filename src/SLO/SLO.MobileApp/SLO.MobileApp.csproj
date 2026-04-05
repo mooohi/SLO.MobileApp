@@ -72,6 +72,9 @@
     <Compile Update="Features\ShoppingLists\Views\ShoppingListItemView.xaml.cs">
       <DependentUpon>ShoppingListItemView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Controls\NumericEntry.xaml.cs">
+      <DependentUpon>NumericEntry.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -85,6 +88,9 @@
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Features\ShoppingLists\Views\ShoppingListItemView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Controls\NumericEntry.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\Controls\Buttons\CircleButton.xaml">
