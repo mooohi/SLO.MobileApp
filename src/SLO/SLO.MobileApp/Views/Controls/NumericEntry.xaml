@@ -10,6 +10,7 @@
             <bases:EntryBase
                 FontAttributes="{TemplateBinding FontAttribute}"
                 FontSize="{TemplateBinding FontSize}"
+                Keyboard="Numeric"
                 Text="{TemplateBinding Value}" />
         </ControlTemplate>
 
