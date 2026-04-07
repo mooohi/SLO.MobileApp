@@ -11,6 +11,7 @@
                 FontAttributes="{TemplateBinding FontAttribute}"
                 FontSize="{TemplateBinding FontSize}"
                 Keyboard="Numeric"
+                Placeholder="{TemplateBinding Placeholder}"
                 Text="{TemplateBinding Value}" />
         </ControlTemplate>
 

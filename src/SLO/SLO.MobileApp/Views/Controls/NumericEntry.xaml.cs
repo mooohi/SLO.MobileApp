@@ -18,6 +18,12 @@ public partial class NumericEntry : ContentView
         set => SetValue(value);
     }
 
+    public string Placeholder
+    {
+        get => GetValue();
+        set => SetValue(value);
+    }
+
     public NumericEntry()
     {
         InitializeComponent();
@@ -32,6 +38,10 @@ public partial class NumericEntry : ContentView
         CreateProperty<int>(
             propertyName: nameof(MinValue),
             propertyChangedDelegate: MinValueChangedEvent);
+
+    public static readonly BindableProperty PlaceholderProperty =
+        CreateProperty<string>(
+            propertyName: nameof(Placeholder));
 
     private static void ValueChangedEvent(BindableObject bindable,
         object oldValue, object newValue)
@@ -102,6 +112,7 @@ public partial class NumericEntry : ContentView
         {
             nameof(Value) => GetValue(ValueProperty),
             nameof(MinValue) => GetValue(MinValueProperty),
+            nameof(Placeholder) => GetValue(PlaceholderProperty),
 
             _ => throw new ArgumentNullException(nameof(propertyName))
         };
@@ -114,11 +125,15 @@ public partial class NumericEntry : ContentView
         {
             case nameof(Value):
                 SetValue(ValueProperty, value);
-                return;
+                break;
 
             case nameof(MinValue):
                 SetValue(MinValueProperty, value);
-                return;
+                break;
+
+            case nameof(Placeholder):
+                SetValue(PlaceholderProperty, value);
+                break;
 
             default:
                 throw new ArgumentNullException(nameof(propertyName));

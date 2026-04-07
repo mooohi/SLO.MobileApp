@@ -30,6 +30,7 @@
             Grid.Column="3"
             Grid.ColumnSpan="2"
             MinValue="1"
+            Placeholder="Quantity"
             Value="{Binding Quantity, Mode=TwoWay}" />
 
         <bases:EntryBase
