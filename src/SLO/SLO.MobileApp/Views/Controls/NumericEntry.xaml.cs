@@ -26,41 +26,75 @@ public partial class NumericEntry : ContentView
     public static readonly BindableProperty ValueProperty =
         CreateProperty<int>(
             propertyName: nameof(Value),
-            propertyChangedDelegate: ValueChangedEvent,
-            createDefaultValueDelegate: BindMinValue);
+            propertyChangedDelegate: ValueChangedEvent);
 
-    private static object BindMinValue(BindableObject bindable)
-    {
-        var numericEntryBase = bindable as NumericEntry;
-
-        if (numericEntryBase is null)
-        {
-            return default;
-        }
-
-        return numericEntryBase.MinValue;
-    }
+    public static readonly BindableProperty MinValueProperty =
+        CreateProperty<int>(
+            propertyName: nameof(MinValue),
+            propertyChangedDelegate: MinValueChangedEvent);
 
     private static void ValueChangedEvent(BindableObject bindable,
         object oldValue, object newValue)
     {
-        var numericEntryBase = bindable as NumericEntry;
+        var numericEntry = bindable as NumericEntry;
 
-        if (numericEntryBase is null)
+        if (numericEntry is null)
         {
             return;
         }
 
-        if (numericEntryBase.MinValue <= (int)newValue)
+        if (oldValue.Equals(newValue))
         {
             return;
         }
 
-        numericEntryBase.Value = numericEntryBase.MinValue;
+        if (NotNumeric(value: newValue))
+        {
+            numericEntry.Value = (int)oldValue;
+        }
+
+        if (numericEntry.MinValue <= (int)newValue)
+        {
+            return;
+        }
+
+        numericEntry.Value = numericEntry.MinValue;
     }
 
-    public static readonly BindableProperty MinValueProperty =
-        CreateProperty<int>(propertyName: nameof(MinValue));
+    private static void MinValueChangedEvent(BindableObject bindable,
+        object oldValue, object newValue)
+    {
+        var numericEntry = bindable as NumericEntry;
+
+        if (numericEntry is null)
+        {
+            return;
+        }
+
+        if (oldValue.Equals(newValue))
+        {
+            return;
+        }
+
+        if (numericEntry.Value > (int)newValue)
+        {
+            return;
+        }
+
+        numericEntry.Value = (int)newValue;
+    }
+
+    private static bool NotNumeric(object value)
+    {
+        int? intValue = value as int?;
+
+        if (intValue is null)
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     private dynamic GetValue(
         [CallerMemberName] string propertyName = null) =>
@@ -93,18 +127,14 @@ public partial class NumericEntry : ContentView
 
     protected static BindableProperty CreateProperty<T>(
         string propertyName,
-        T defaultValue = default,
+        object defaultValue = null,
         BindingMode defaultBindingMode = BindingMode.OneWay,
-        BindableProperty.ValidateValueDelegate validateValueDelegate = null,
-        BindableProperty.BindingPropertyChangedDelegate propertyChangedDelegate = null,
-        BindableProperty.CreateDefaultValueDelegate createDefaultValueDelegate = null) =>
+        BindableProperty.BindingPropertyChangedDelegate propertyChangedDelegate = null) =>
         BindableProperty.Create(
             propertyName,
             returnType: typeof(T),
             declaringType: typeof(NumericEntry),
             defaultValue,
             defaultBindingMode,
-            validateValue: validateValueDelegate,
-            propertyChanged: propertyChangedDelegate,
-            defaultValueCreator: createDefaultValueDelegate);
+            propertyChanged: propertyChangedDelegate);
 }
