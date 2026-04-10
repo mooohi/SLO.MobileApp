@@ -1,6 +1,5 @@
 using Microsoft.Maui.Controls;
-using System;
-using System.Runtime.CompilerServices;
+using Microsoft.Maui.Graphics;
 
 namespace SLO.MobileApp.Views.Controls;
 
@@ -8,20 +7,26 @@ public partial class NumericEntry : ContentView
 {
     public int Value
     {
-        get => GetValue();
-        set => SetValue(value);
+        get => (int)GetValue(ValueProperty);
+        set => SetValue(ValueProperty, value);
     }
 
     public int MinValue
     {
-        get => GetValue();
-        set => SetValue(value);
+        get => (int)GetValue(MinValueProperty);
+        set => SetValue(MinValueProperty, value);
+    }
+
+    public Color TextColor
+    {
+        get => (Color)GetValue(TextColorProperty);
+        set => SetValue(TextColorProperty, value);
     }
 
     public string Placeholder
     {
-        get => GetValue();
-        set => SetValue(value);
+        get => (string)GetValue(PlaceholderProperty);
+        set => SetValue(PlaceholderProperty, value);
     }
 
     public NumericEntry()
@@ -42,6 +47,10 @@ public partial class NumericEntry : ContentView
     public static readonly BindableProperty PlaceholderProperty =
         CreateProperty<string>(
             propertyName: nameof(Placeholder));
+
+    public static readonly BindableProperty TextColorProperty =
+        CreateProperty<Color>(
+            propertyName: nameof(TextColor));
 
     private static void ValueChangedEvent(BindableObject bindable,
         object oldValue, object newValue)
@@ -104,40 +113,6 @@ public partial class NumericEntry : ContentView
         }
 
         return false;
-    }
-
-    private dynamic GetValue(
-        [CallerMemberName] string propertyName = null) =>
-        propertyName switch
-        {
-            nameof(Value) => GetValue(ValueProperty),
-            nameof(MinValue) => GetValue(MinValueProperty),
-            nameof(Placeholder) => GetValue(PlaceholderProperty),
-
-            _ => throw new ArgumentNullException(nameof(propertyName))
-        };
-
-    private void SetValue(
-        object value,
-        [CallerMemberName] string propertyName = null)
-    {
-        switch (propertyName)
-        {
-            case nameof(Value):
-                SetValue(ValueProperty, value);
-                break;
-
-            case nameof(MinValue):
-                SetValue(MinValueProperty, value);
-                break;
-
-            case nameof(Placeholder):
-                SetValue(PlaceholderProperty, value);
-                break;
-
-            default:
-                throw new ArgumentNullException(nameof(propertyName));
-        }
     }
 
     protected static BindableProperty CreateProperty<T>(
