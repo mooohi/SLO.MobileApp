@@ -34,24 +34,6 @@ public partial class NumericEntry : ContentView
         InitializeComponent();
     }
 
-    public static readonly BindableProperty ValueProperty =
-        CreateProperty<int>(
-            propertyName: nameof(Value),
-            propertyChangedDelegate: ValueChangedEvent);
-
-    public static readonly BindableProperty MinValueProperty =
-        CreateProperty<int>(
-            propertyName: nameof(MinValue),
-            propertyChangedDelegate: MinValueChangedEvent);
-
-    public static readonly BindableProperty PlaceholderProperty =
-        CreateProperty<string>(
-            propertyName: nameof(Placeholder));
-
-    public static readonly BindableProperty TextColorProperty =
-        CreateProperty<Color>(
-            propertyName: nameof(TextColor));
-
     private static void ValueChangedEvent(BindableObject bindable,
         object oldValue, object newValue)
     {
@@ -114,17 +96,4 @@ public partial class NumericEntry : ContentView
 
         return false;
     }
-
-    protected static BindableProperty CreateProperty<T>(
-        string propertyName,
-        object defaultValue = null,
-        BindingMode defaultBindingMode = BindingMode.OneWay,
-        BindableProperty.BindingPropertyChangedDelegate propertyChangedDelegate = null) =>
-        BindableProperty.Create(
-            propertyName,
-            returnType: typeof(T),
-            declaringType: typeof(NumericEntry),
-            defaultValue,
-            defaultBindingMode,
-            propertyChanged: propertyChangedDelegate);
 }
