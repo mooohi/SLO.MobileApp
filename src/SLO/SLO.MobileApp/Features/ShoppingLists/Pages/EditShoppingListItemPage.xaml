@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:bases="clr-namespace:SLO.MobileApp.Views.Bases"
+    xmlns:controls="clr-namespace:SLO.MobileApp.Views.Controls"
     xmlns:local="clr-namespace:SLO.MobileApp.Features.ShoppingLists.Pages"
     x:DataType="local:EditShoppingListItemPage">
 
@@ -22,12 +23,12 @@
             Placeholder="Item Name"
             Text="{Binding Name, Mode=TwoWay}" />
 
-        <Entry
+        <controls:NumericEntry
             Grid.Row="0"
             Grid.Column="3"
-            Keyboard="Numeric"
+            MinValue="1"
             Placeholder="Quantity"
-            Text="{Binding Quantity, Mode=TwoWay}" />
+            Value="{Binding Quantity, Mode=TwoWay}" />
 
         <Entry
             Grid.Row="1"
