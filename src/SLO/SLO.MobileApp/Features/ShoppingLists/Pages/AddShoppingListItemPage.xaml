@@ -18,7 +18,7 @@
         RowDefinitions="*,*,*"
         RowSpacing="10">
 
-        <bases:EntryBase
+        <controls:TextEntry
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="3"
@@ -33,7 +33,7 @@
             Placeholder="Quantity"
             Value="{Binding Quantity, Mode=TwoWay}" />
 
-        <bases:EntryBase
+        <controls:TextEntry
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="5"

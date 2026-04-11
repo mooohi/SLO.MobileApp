@@ -96,6 +96,9 @@
     <MauiXaml Update="Views\Controls\Buttons\CircleButton.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="Views\Controls\TextEntry.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
   </ItemGroup>
 
 </Project>
