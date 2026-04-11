@@ -12,7 +12,7 @@
 
     <Grid
         Margin="10"
-        ColumnDefinitions="*,*,*,*,*"
+        ColumnDefinitions="*,*,*,*"
         ColumnSpacing="10"
         MaximumHeightRequest="160"
         RowDefinitions="*,*,*"
@@ -43,13 +43,13 @@
         <bases:ButtonBase
             x:Name="DiscardButton"
             Grid.Row="2"
-            Grid.Column="3"
+            Grid.Column="2"
             Clicked="ClosePageClicked"
             Text="Discard" />
 
         <bases:ButtonBase
             Grid.Row="2"
-            Grid.Column="4"
+            Grid.Column="3"
             Clicked="ClosePageClicked"
             Text="Save" />
 

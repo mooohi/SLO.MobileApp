@@ -6,7 +6,9 @@
     xmlns:bases="clr-namespace:SLO.MobileApp.Views.Bases"
     xmlns:controls="clr-namespace:SLO.MobileApp.Views.Controls"
     xmlns:local="clr-namespace:SLO.MobileApp.Features.ShoppingLists.Pages"
-    x:DataType="local:EditShoppingListItemPage">
+    x:DataType="local:EditShoppingListItemPage"
+    MaximumHeightRequest="200"
+    MaximumWidthRequest="400">
 
     <Grid
         Margin="10"
