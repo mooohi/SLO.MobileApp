@@ -21,6 +21,7 @@
             ItemsUpdatingScrollMode="KeepScrollOffset">
 
             <CollectionView.EmptyView>
+
                 <Grid
                     Grid.Row="0"
                     Grid.RowSpan="2"
@@ -35,17 +36,11 @@
                         VerticalTextAlignment="Center" />
 
                 </Grid>
-
             </CollectionView.EmptyView>
-
             <CollectionView.ItemTemplate>
-
                 <DataTemplate x:DataType="models:ShoppingItem">
-
                     <SwipeView android:SwipeView.SwipeTransitionMode="Drag">
-
                         <SwipeView.RightItems>
-
                             <SwipeItems>
 
                                 <SwipeItem
@@ -59,21 +54,14 @@
                                     Text="Edit" />
 
                             </SwipeItems>
-
                         </SwipeView.RightItems>
-
                         <views:ShoppingListItemView BindingContext="{Binding .}" />
-
                     </SwipeView>
-
                 </DataTemplate>
-
             </CollectionView.ItemTemplate>
-
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout ItemSpacing="5" Orientation="Vertical" />
             </CollectionView.ItemsLayout>
-
         </CollectionView>
 
         <Grid Grid.Row="1">
@@ -88,7 +76,5 @@
                 Text="+" />
 
         </Grid>
-
     </Grid>
-
 </ContentPage>
