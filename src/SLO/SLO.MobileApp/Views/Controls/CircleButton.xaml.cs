@@ -15,6 +15,7 @@ public partial class CircleButton : TemplatedView
         [CallerMemberName] string propertyName = null)
     {
         ResetTemplatedViewDimensions(propertyName);
+        ResetTemplatedViewStyles(propertyName);
 
         base.OnPropertyChanged(propertyName);
     }
@@ -29,6 +30,23 @@ public partial class CircleButton : TemplatedView
 
             case nameof(HeightRequest) when (HeightRequest != BaseButtonDimensions):
                 SetValue(HeightRequestProperty, BaseButtonDimensions);
+                break;
+
+            case nameof(BackgroundColor) when (BackgroundColor != ButtonColor):
+                SetValue(BackgroundColorProperty, ButtonColor);
+                break;
+
+            default:
+                return;
+        }
+    }
+
+    private void ResetTemplatedViewStyles(string propertyName)
+    {
+        switch (propertyName)
+        {
+            case nameof(BackgroundColor) when (BackgroundColor != ButtonColor):
+                SetValue(BackgroundColorProperty, ButtonColor);
                 break;
 
             default:
