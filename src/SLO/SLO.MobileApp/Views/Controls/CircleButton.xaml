@@ -11,6 +11,7 @@
 
             <bases:ButtonBase
                 x:Name="ButtonBase"
+                Background="{TemplateBinding Background}"
                 BackgroundColor="{TemplateBinding ButtonColor}"
                 Clicked="ButtonClicked"
                 CornerRadius="{TemplateBinding Size}"

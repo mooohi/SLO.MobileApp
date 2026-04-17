@@ -36,6 +36,12 @@ public partial class CircleButton
         set => SetValue(ButtonColorProperty, value);
     }
 
+    public new Brush Background
+    {
+        get => (Brush)GetValue(BackgroundProperty);
+        set => SetValue(BackgroundProperty, value);
+    }
+
     public Color TextColor
     {
         get => (Color)GetValue(TextColorProperty);
@@ -66,6 +72,9 @@ public partial class CircleButton
 
     public static readonly BindableProperty ButtonColorProperty =
         CreateProperty<Color>(propertyName: nameof(ButtonColor));
+
+    public static new readonly BindableProperty BackgroundProperty =
+        CreateProperty<Brush>(propertyName: nameof(Background));
 
     public static readonly BindableProperty TextColorProperty =
         CreateProperty<Color>(propertyName: nameof(TextColor));
