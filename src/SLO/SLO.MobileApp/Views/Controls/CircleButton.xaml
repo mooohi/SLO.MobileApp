@@ -6,7 +6,6 @@
     xmlns:bases="clr-namespace:SLO.MobileApp.Views.Bases">
 
     <TemplatedView.ControlTemplate>
-
         <ControlTemplate>
 
             <bases:ButtonBase
@@ -24,7 +23,5 @@
                 WidthRequest="{TemplateBinding BaseButtonDimensions}" />
 
         </ControlTemplate>
-
     </TemplatedView.ControlTemplate>
-
 </TemplatedView>
