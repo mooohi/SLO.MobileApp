@@ -15,8 +15,14 @@ public partial class CircleButton
     private static readonly BindablePropertyKey HeightRequestPropertyKey =
         CreateReadOnlyProperty<double>(propertyName: nameof(HeightRequest));
 
+    private static readonly BindablePropertyKey WidthRequestPropertyKey =
+        CreateReadOnlyProperty<double>(propertyName: nameof(WidthRequest));
+
     private static new readonly BindableProperty HeightRequestProperty =
         HeightRequestPropertyKey.BindableProperty;
+
+    private static new readonly BindableProperty WidthRequestProperty =
+        WidthRequestPropertyKey.BindableProperty;
 
     public static readonly BindableProperty TextProperty =
         CreateProperty<string>(propertyName: nameof(Text));
@@ -92,6 +98,9 @@ public partial class CircleButton
 
     public new double HeightRequest
     { get => (double)GetValue(HeightRequestProperty); }
+
+    public new double WidthRequest
+    { get => (double)GetValue(WidthRequestProperty); }
 
     public event EventHandler Clicked;
 
