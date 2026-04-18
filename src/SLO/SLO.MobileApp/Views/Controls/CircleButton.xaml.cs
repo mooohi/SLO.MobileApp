@@ -30,10 +30,6 @@ public partial class CircleButton : TemplatedView
                 SetValue(HeightRequestProperty, BaseButtonDimensions);
                 break;
 
-            case nameof(BackgroundColor) when (BackgroundColor != ButtonColor):
-                SetValue(VisualElement.BackgroundColorProperty, ButtonColor);
-                break;
-
             default:
                 return;
         }
