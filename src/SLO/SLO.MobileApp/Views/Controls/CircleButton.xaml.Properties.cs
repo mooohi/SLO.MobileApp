@@ -12,6 +12,12 @@ public partial class CircleButton
     private static readonly BindablePropertyKey BackgroundColorPropertyKey =
         CreateReadOnlyProperty<Color>(propertyName: nameof(BackgroundColor));
 
+    private static readonly BindablePropertyKey HeightRequestPropertyKey =
+        CreateReadOnlyProperty<double>(propertyName: nameof(HeightRequest));
+
+    private static new readonly BindableProperty HeightRequestProperty =
+        HeightRequestPropertyKey.BindableProperty;
+
     public static readonly BindableProperty TextProperty =
         CreateProperty<string>(propertyName: nameof(Text));
 
@@ -66,12 +72,6 @@ public partial class CircleButton
         set => SetValue(ButtonColorProperty, value);
     }
 
-    public new Brush Background
-    { get => (Brush)GetValue(BackgroundPropertyKey.BindableProperty); }
-
-    public new Color BackgroundColor
-    { get => (Color)GetValue(BackgroundColorPropertyKey.BindableProperty); }
-
     public Color TextColor
     {
         get => (Color)GetValue(TextColorProperty);
@@ -83,6 +83,15 @@ public partial class CircleButton
         get => (double)GetValue(BaseButtonDimensionsProperty);
         private set => SetValue(BaseButtonDimensionsProperty, value);
     }
+
+    public new Brush Background
+    { get => (Brush)GetValue(BackgroundPropertyKey.BindableProperty); }
+
+    public new Color BackgroundColor
+    { get => (Color)GetValue(BackgroundColorPropertyKey.BindableProperty); }
+
+    public new double HeightRequest
+    { get => (double)GetValue(HeightRequestProperty); }
 
     public event EventHandler Clicked;
 

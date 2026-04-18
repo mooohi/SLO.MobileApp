@@ -26,10 +26,6 @@ public partial class CircleButton : TemplatedView
                 SetValue(WidthRequestProperty, BaseButtonDimensions);
                 break;
 
-            case nameof(HeightRequest) when (HeightRequest != BaseButtonDimensions):
-                SetValue(HeightRequestProperty, BaseButtonDimensions);
-                break;
-
             default:
                 return;
         }
