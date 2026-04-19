@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SLO.MobileApp.Features.ShoppingLists.Pages.EditShoppingListItemPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:bases="clr-namespace:SLO.MobileApp.Views.Bases"
+    xmlns:controls="clr-namespace:SLO.MobileApp.Views.Controls"
+    xmlns:local="clr-namespace:SLO.MobileApp.Features.ShoppingLists.Pages"
+    x:DataType="local:EditShoppingListItemPage"
+    MaximumHeightRequest="200"
+    MaximumWidthRequest="400">
+
+    <Grid
+        Margin="10"
+        ColumnDefinitions="*,*,*,*"
+        ColumnSpacing="10"
+        MaximumHeightRequest="160"
+        RowDefinitions="*,*,*"
+        RowSpacing="10">
+
+        <controls:TextEntry
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Placeholder="Item Name"
+            Text="{Binding Name, Mode=TwoWay}" />
+
+        <controls:NumericEntry
+            Grid.Row="0"
+            Grid.Column="3"
+            MinValue="1"
+            Placeholder="Quantity"
+            Value="{Binding Quantity, Mode=TwoWay}" />
+
+        <controls:TextEntry
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="4"
+            Placeholder="Item Description"
+            Text="{Binding Description, Mode=TwoWay}" />
+
+        <bases:ButtonBase
+            x:Name="DiscardButton"
+            Grid.Row="2"
+            Grid.Column="2"
+            Clicked="ClosePageClicked"
+            Text="Discard" />
+
+        <bases:ButtonBase
+            Grid.Row="2"
+            Grid.Column="3"
+            Clicked="ClosePageClicked"
+            Text="Save" />
+
+    </Grid>
+</ContentPage>

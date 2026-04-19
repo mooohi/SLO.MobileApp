@@ -52,6 +52,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.50" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.5" />
 		<PackageReference Include="Xeption" Version="2.8.0" />
@@ -59,6 +60,54 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SLO.MobileApp.Core\SLO.MobileApp.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Features\ShoppingLists\Pages\AddShoppingListItemPage.xaml.cs">
+      <DependentUpon>AddShoppingListItemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Features\ShoppingLists\Pages\ShoppingListPage.xaml.cs">
+      <DependentUpon>ShoppingListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Features\ShoppingLists\Views\ShoppingListItemView.xaml.cs">
+      <DependentUpon>ShoppingListItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Controls\NumericEntry.xaml.cs">
+      <DependentUpon>NumericEntry.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <MauiXaml Update="Features\ShoppingLists\Pages\AddShoppingListItemPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Features\ShoppingLists\Pages\EditShoppingListItemPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Features\ShoppingLists\Pages\ShoppingListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Features\ShoppingLists\Views\ShoppingListItemView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Controls\CircleButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Controls\NumericEntry.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Controls\Buttons\CircleButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Controls\TextEntry.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Views\Controls\TextEntry.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 
 </Project>

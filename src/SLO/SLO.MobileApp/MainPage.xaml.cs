@@ -1,28 +1,43 @@
-﻿using Microsoft.Maui.Accessibility;
-using Microsoft.Maui.Controls;
+﻿using Microsoft.Maui.Controls;
+using SLO.MobileApp.Core.Models.Foundations.ShoppingItems;
 using System;
+using System.ComponentModel;
 
 namespace SLO.MobileApp;
 
-public partial class MainPage : ContentPage
+public partial class MainPage : ContentPage, INotifyPropertyChanged
 {
+    private ShoppingItem _shoppingItem;
+
+    public ShoppingItem ShoppingItem
+    {
+        get { return _shoppingItem; }
+        set
+        {
+            _shoppingItem = value;
+            OnPropertyChanged();
+        }
+    }
+
+
     int count = 0;
 
     public MainPage()
     {
         InitializeComponent();
+
+        ShoppingItem =
+            new ShoppingItem
+            {
+                CreatedAt = DateTime.Now,
+                CreatedBy = Guid.NewGuid(),
+                Description = "Desc",
+                Name = "New",
+                Quantity = 123
+            };
+
+        BindingContext = this;
     }
 
 #nullable enable
-    private void OnCounterClicked(object? sender, EventArgs e)
-    {
-        count++;
-
-        if (count == 1)
-            CounterBtn.Text = $"Clicked {count} time";
-        else
-            CounterBtn.Text = $"Clicked {count} times";
-
-        SemanticScreenReader.Announce(CounterBtn.Text);
-    }
 }

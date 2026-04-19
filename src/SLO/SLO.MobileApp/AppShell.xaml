@@ -4,11 +4,29 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SLO.MobileApp"
-    Title="SLO.MobileApp">
+    xmlns:shoppingList="clr-namespace:SLO.MobileApp.Features.ShoppingLists.Pages"
+    Title="Personal Shopping List Organizer">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+
+        <Tab Title="Cart">
+
+            <ShellContent
+                Title="Shopping List"
+                ContentTemplate="{DataTemplate shoppingList:ShoppingListPage}"
+                Route="ShoppingListPage" />
+
+        </Tab>
+
+        <Tab Title="Home">
+
+            <ShellContent
+                Title="Home"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage" />
+
+        </Tab>
+
+    </TabBar>
 
 </Shell>
